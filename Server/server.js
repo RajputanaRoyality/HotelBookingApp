@@ -12,7 +12,7 @@ app.use(cors())
 
 const port = process.env.PORT || 3000;
 
-connectDB();
+await connectDB();
 
 app.use(express.json())
 app.use(clerkMiddleware())
