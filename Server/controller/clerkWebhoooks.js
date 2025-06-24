@@ -1,4 +1,4 @@
-import User from "../modals/user.js";
+import User from "../modals/User.js"
 import { Webhook } from "svix";
 
 const clerkWebhooks = async (req, res) => {

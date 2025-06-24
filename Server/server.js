@@ -1,22 +1,24 @@
 import express from 'express';
-import cors from 'cors';
 import 'dotenv/config';
+import cors from 'cors';
 import connectDB from './configs/db.js';
 import { clerkMiddleware } from '@clerk/express'
 import clerkWebhooks from './controller/clerkWebhoooks.js';
+
+
+connectDB();
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(clerkMiddleware())
 
-const port = process.env.PORT || 3000;
-
-await connectDB();
-
 app.use("/api/clerk",clerkWebhooks);
 
 //API Routes
-app.get('/',(req,res)=>res.send('Server is Live!'))
+app.get('/',(req,res)=>res.send('API is Working!'))
 
-app.listen(port,()=>console.log(`server listening at http://localhost:${port}`))
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT,()=>console.log(`server running on http://localhost:${PORT}`))
