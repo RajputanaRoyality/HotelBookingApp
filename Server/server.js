@@ -9,7 +9,6 @@ import connectCloudinary from './configs/cloudinary.js';
 import hotelRouter from './routes/hotelRoutes.js';
 import roomRouter from './routes/roomRoutes.js';
 import bookingRouter from './routes/bookingRoutes.js';
-import bodyParser from 'body-parser';
 
 
 connectDB();
@@ -18,15 +17,11 @@ connectCloudinary();
 const app = express()
 app.use(cors())
 
-app.post(
-  '/api/clerk',
-  bodyParser.raw({ type: '*/*' }), // use raw body
-  clerkWebhooks
-);
-
 app.use(clerkMiddleware())
 
 app.use(express.json())
+
+app.use("/api/clerk",clerkWebhooks)
 
 //API Routes
 app.get('/',(req,res)=>res.send('API is Working!'))
